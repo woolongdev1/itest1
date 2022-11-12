@@ -106,7 +106,7 @@ public class MiningForeGroundService extends Service {
         return (int)(level / (float)scale * 100);
     }
 
-    String tdcAddressProv = "";
+    String isoAddressProv = "";
     String miningPoolAddress = "";
     boolean mobileDataAvoid = true;
     boolean batteryForMining = false;
@@ -119,9 +119,9 @@ public class MiningForeGroundService extends Service {
         boolean someThingChanged = false;
 
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
-        String tdcAddress = sharedPreferences.getString("user", "");
-        if (tdcAddressProv != tdcAddress) {
-            tdcAddressProv = tdcAddress;
+        String isoAddress = sharedPreferences.getString("user", "");
+        if (isoAddressProv != isoAddress) {
+            isoAddressProv = isoAddress;
             someThingChanged = true;
         }
 
@@ -237,7 +237,7 @@ public class MiningForeGroundService extends Service {
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setSubText("used cores: " + cpuCoresSelected)
                 .setUsesChronometer(true)
-                .setContentTitle("TDC Miner")
+                .setContentTitle("iso Miner")
                 .setOngoing(true);
 
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -325,21 +325,21 @@ public class MiningForeGroundService extends Service {
                             }
 
 
-                            if (tdcAddressProv == null || tdcAddressProv == ""){
-                                sendLogs("[STATUS] Device is not mining\nPlease provide your TDC - Address.");
+                            if (isoAddressProv == null || isoAddressProv == ""){
+                                sendLogs("[STATUS] Device is not mining\nPlease provide your iso - Address.");
                             }
 
                             boolean deviceIsCharging = isBatteryCharging();
                             if (batteryForMining){
                                 deviceIsCharging = true;
                             }
-                            if(tdcAddressProv != null && tdcAddressProv != "" && !mobileDataAvoid && BatteryTemp < batteryTempMax && getBatteryPercentage() > batteryLevelMin && deviceIsCharging && !miningLibary.miner.isMiningRunning()){
+                            if(isoAddressProv != null && isoAddressProv != "" && !mobileDataAvoid && BatteryTemp < batteryTempMax && getBatteryPercentage() > batteryLevelMin && deviceIsCharging && !miningLibary.miner.isMiningRunning()){
                                 wakeLock.acquire(1440*60*1000L /*one day*/);
                                 BitZenyMiningLibrary.Algorithm algorithm = BitZenyMiningLibrary.Algorithm.YESPOWER;
                                 if (wakeLock.isHeld()){
                                     miningLibary.miner.startMining(
                                             (String)miningPoolAddress,
-                                            (String)tdcAddressProv + ".Android-WorkerBee",
+                                            (String)isoAddressProv + ".Android-WorkerBee",
                                             (String)"c=ISO",
                                             (int)cpuCoresSelected,
                                             algorithm);
@@ -349,13 +349,13 @@ public class MiningForeGroundService extends Service {
                                 }
                             }
 
-                            if(tdcAddressProv != null && tdcAddressProv != "" && mobileDataAvoid && isWiFi && BatteryTemp < batteryTempMax && getBatteryPercentage() > batteryLevelMin && deviceIsCharging && !miningLibary.miner.isMiningRunning()){
+                            if(isoAddressProv != null && isoAddressProv != "" && mobileDataAvoid && isWiFi && BatteryTemp < batteryTempMax && getBatteryPercentage() > batteryLevelMin && deviceIsCharging && !miningLibary.miner.isMiningRunning()){
                                 wakeLock.acquire(1440*60*1000L /*one day*/);
                                 BitZenyMiningLibrary.Algorithm algorithm = BitZenyMiningLibrary.Algorithm.YESPOWER;
                                 if (wakeLock.isHeld()){
                                     miningLibary.miner.startMining(
                                             (String)miningPoolAddress,
-                                            (String)tdcAddressProv + ".Android-WorkerBee",
+                                            (String)isoAddressProv + ".Android-WorkerBee",
                                             (String)"c=ISO",
                                             (int)cpuCoresSelected,
                                             algorithm);
@@ -367,7 +367,7 @@ public class MiningForeGroundService extends Service {
 
                             if(miningLibary.miner.isMiningRunning()){
                                 sendHashrate(miningLibary.hashrateConfirmed);
-                                sendLogs("[STATUS] Device is Mining\nLOG:" + miningLibary.logMessage + "\nPool: " + miningPoolAddress + "\nTDC Address: " + tdcAddressProv + "\nCPU Cores: " + cpuCoresSelected + "/" + cpuCoresMax);
+                                sendLogs("[STATUS] Device is Mining\nLOG:" + miningLibary.logMessage + "\nPool: " + miningPoolAddress + "\niso Address: " + isoAddressProv + "\nCPU Cores: " + cpuCoresSelected + "/" + cpuCoresMax);
                             }else{
                                 sendHashrate(0);
 
