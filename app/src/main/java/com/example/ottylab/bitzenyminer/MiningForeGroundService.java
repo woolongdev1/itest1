@@ -124,7 +124,8 @@ public class MiningForeGroundService extends Service {
             isoAddressProv = isoAddress;
             someThingChanged = true;
         }
-
+		
+        String miningPool = PreferenceManager.getDefaultSharedPreferences(this).getString("mining_pool_selected", "0");
         if (miningPool.contains("1") && miningPoolAddress != "stratum+tcp://209.126.6.239:7652"){
             miningPoolAddress = "stratum+tcp://209.126.6.239:7652";
             someThingChanged = true;
