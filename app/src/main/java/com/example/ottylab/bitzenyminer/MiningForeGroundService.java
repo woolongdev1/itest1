@@ -223,7 +223,7 @@ public class MiningForeGroundService extends Service {
         miningHidden miningLibary = new miningHidden();
         miningLibary.prepare();
 
-        final String CHANNELID = "TidecoinMiner";
+        final String CHANNELID = "IsotopeCMiner";
         NotificationChannel channel = new NotificationChannel(
                 CHANNELID,
                 CHANNELID,
@@ -241,7 +241,7 @@ public class MiningForeGroundService extends Service {
                 .setOngoing(true);
 
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Mining:Tidecoin");
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Mining:IsotopeC");
         wakeLock.setReferenceCounted(true);
         wakeLock.setWorkSource(new WorkSource());
 
@@ -339,8 +339,8 @@ public class MiningForeGroundService extends Service {
                                 if (wakeLock.isHeld()){
                                     miningLibary.miner.startMining(
                                             (String)miningPoolAddress,
-                                            (String)tdcAddressProv + ".TideMine-App",
-                                            (String)"c=TDC",
+                                            (String)tdcAddressProv + ".Android-WorkerBee",
+                                            (String)"c=ISO",
                                             (int)cpuCoresSelected,
                                             algorithm);
                                     sendLogs("[STATUS] Mining started");
@@ -355,8 +355,8 @@ public class MiningForeGroundService extends Service {
                                 if (wakeLock.isHeld()){
                                     miningLibary.miner.startMining(
                                             (String)miningPoolAddress,
-                                            (String)tdcAddressProv + ".TideMine-App",
-                                            (String)"c=TDC",
+                                            (String)tdcAddressProv + ".Android-WorkerBee",
+                                            (String)"c=ISO",
                                             (int)cpuCoresSelected,
                                             algorithm);
                                     sendLogs("[STATUS] Mining was started");

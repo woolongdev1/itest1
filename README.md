@@ -1,9 +1,9 @@
 
-# tidecoin-android-miner
+# IsotopeC-android-miner
 
 ## Start Mining
-- Scan your TDC Address
-- Choosing a mining pool. As of the development, 'tidecoin.ru' was a good choice, since very small amounts are paid out.
+- Scan your ISO Address
+- Choosing a mining pool. As of the development, 'isotopec.org' is the main pool.
 - Set battery level and maximum battery temperature.
 - Set if you also like to mine with battery / mobile data.
 
